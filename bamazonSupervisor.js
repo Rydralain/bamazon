@@ -1,0 +1,5 @@
+/*
+FUNCTIONALITY SUMMARY
+    View sales by department
+    Create department
+*/
