@@ -1,0 +1,36 @@
+use bamazon;
+
+insert into departments (department_name, overhead_costs) values ("food", 1000);
+insert into departments (department_name, overhead_costs) values ("ducks", 100);
+insert into departments (department_name, overhead_costs) values ("cars", 50000);
+
+INSERT INTO products (product_name, department_id, price, stock_quantity)
+SELECT "cheese", department_id, "6", "500"
+FROM   departments
+WHERE  department_name = "food"
+
+INSERT INTO products (product_name, department_id, price, stock_quantity)
+SELECT "meat", department_id, "8", "500"
+FROM   departments
+WHERE  department_name = "food"
+
+INSERT INTO products (product_name, department_id, price, stock_quantity)
+SELECT "mallard", department_id, "500", "12"
+FROM   departments
+WHERE  department_name = "duck"
+
+INSERT INTO products (product_name, department_id, price, stock_quantity)
+SELECT "weird", department_id, "10000", "1"
+FROM   departments
+WHERE  department_name = "ducks"
+
+INSERT INTO products (product_name, department_id, price, stock_quantity)
+SELECT "the cheap one", department_id, "10000", "50"
+FROM   departments
+WHERE  department_name = "cars"
+
+INSERT INTO products (product_name, department_id, price, stock_quantity)
+SELECT "the fast one", department_id, "1000000", "5"
+FROM   departments
+WHERE  department_name = "cars"
+
