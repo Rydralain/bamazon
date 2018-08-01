@@ -60,7 +60,7 @@ function selectQuantity(itemID, stockLevel){
     inquirer.prompt(getQuantity).then(answers => {
         let quantity = parseInt(answers.quantity);
         if(quantity <= stockLevel){
-            console.log("ok");
+            purchaseItem(itemID, quantity);
         }
         else if(answers.quantity == "exit"){
             console.log("Cancelling");
@@ -74,10 +74,14 @@ function selectQuantity(itemID, stockLevel){
 }
 
 function purchaseItem(item, quantity){
-    // form query
     // send query
-    // return results
-    // ask to continue or end
+    connection.query("UPDATE products SET stock_quantity -= ? where ?", [quantity, {item_id: quantity}], function(err, res){
+        if(err) throw err;
+        // return results
+        console.log("Purchase complete");
+        itemSelect();
+        // ask to continue or end
+    });
 }
 
 // start action loooop
