@@ -23,7 +23,7 @@ function itemSelect(){
         for(let i = 0; i < res.length; i++){
             itemsList[i] = [];
             itemsList[i].name = res[i].product_name + " - $" + res[i].price + " - [" + res[i].stock_quantity + "]";
-            itemsList[i].value = res[i].item_id;
+            itemsList[i].value = i;
         }
         itemsList[res.length] = "CANCEL";
         // display them as a selectable list in inquirer
@@ -35,12 +35,34 @@ function itemSelect(){
         };
         inquirer.prompt(listQuestion).then(answers => {
             // after, allow quantity select
-            console.log("selected ID: " + answers.productSelect);
+            let selected = {}
+            selected = res[answers.productSelect];
+            selectQuantity(selected.product_id, selected.stock_quantity);
         });
     });
-    // check if selected quantity is valid
-    // send db update
-    //purchaseItem(item, quantity);
+}
+
+function selectQuantity(itemID, stockLevel){
+    // prep question
+    let getQuantity = {
+        type: "input",
+        name: "quantity",
+        Message: "How many would you like to purchase? (or 'exit' to quit)"
+    }
+    inquirer.prompt(getQuantity).then(answers => {
+        let quantity = parseInt(answers.quantity);
+        if(quantity <= stockLevel){
+            console.log("ok");
+        }
+        else if(answers.quantity == "exit"){
+            console.log("Cancelling");
+            itemSelect();
+        }
+        else{
+            console.log("Insufficient stock.")
+            selectQuantity(itemID, stockLevel);
+        }
+    });
 }
 
 function purchaseItem(item, quantity){
