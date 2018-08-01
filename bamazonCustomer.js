@@ -24,7 +24,9 @@ function itemSelect(){
             itemsList[i] = [];
             itemsList[i].name = res[i].product_name + " - $" + res[i].price + " - [" + res[i].stock_quantity + "]";
             itemsList[i].value = i;
+        
         }
+        itemsList[res.length] = [];
         itemsList[res.length].name = "CANCEL";
         itemsList[res.length].value = "CANCEL";
         // display them as a selectable list in inquirer
