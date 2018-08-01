@@ -25,7 +25,8 @@ function itemSelect(){
             itemsList[i].name = res[i].product_name + " - $" + res[i].price + " - [" + res[i].stock_quantity + "]";
             itemsList[i].value = i;
         }
-        itemsList[res.length] = "CANCEL";
+        itemsList[res.length].name = "CANCEL";
+        itemsList[res.length].value = "CANCEL";
         // display them as a selectable list in inquirer
         listQuestion = {
             type : "list",
@@ -34,6 +35,11 @@ function itemSelect(){
             choices : itemsList
         };
         inquirer.prompt(listQuestion).then(answers => {
+            if(answers.productSelect == "CANCEL"){
+                console.log("Quitting");
+                connection.end();
+                return
+            }
             // after, allow quantity select
             let selected = {}
             selected = res[answers.productSelect];
