@@ -52,16 +52,14 @@ function itemSelect(){
 
 function selectQuantity(itemID, stockLevel){
     // prep question
-    console.log(itemID, 1)
     let getQuantity = {
         type: "input",
         name: "quantity",
-        Message: "How many would you like to purchase? (or 'exit' to quit)"
+        message: "How many would you like to purchase? (or 'exit' to quit)"
     }
     inquirer.prompt(getQuantity).then(answers => {
         let quantity = parseInt(answers.quantity);
         if(quantity <= stockLevel){
-            console.log(itemID, 2)
             purchaseItem(itemID, quantity);
         }
         else if(answers.quantity == "exit"){
@@ -77,7 +75,6 @@ function selectQuantity(itemID, stockLevel){
 
 function purchaseItem(itemID, quantity){
     // send query
-    console.log(itemID, 3)
     connection.query("UPDATE products SET stock_quantity = stock_quantity - ? where ?", [quantity, {item_id: itemID}], function(err, res){
         if(err) throw err;
         // return results
