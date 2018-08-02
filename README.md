@@ -4,6 +4,7 @@ The Bamazon application includes functionality for a customer to select items fo
 
 The database and module design is as follows:
 ![Overview](https://rydralain.github.io/bamazon/screenshots/overview.png)
+Note that there was a minor change from the original specifications where the department_name in the products table has been changed to department_id for normalization reasons. This data is readily available through join on that column.
 
 The basic flow of the application is as follows:
 
